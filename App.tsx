@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/screens/Home";
@@ -7,26 +7,46 @@ import { CounterProvider } from "./src/contexts/CounterContext";
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import Details from "./src/screens/Details";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-export type RootStackParams = {
+export type StackParams = {
   Home: undefined;
   Login: undefined;
   Details: { email?: string };
 };
 
-const Stack = createNativeStackNavigator();
+export type BottomBarParams = {
+  Main: undefined;
+  Settings: undefined;
+};
+
+const Stack = createNativeStackNavigator<StackParams>();
+const BottomTabBar = createBottomTabNavigator<BottomBarParams>();
+
+const RootStack = () => (
+  <Stack.Navigator initialRouteName="Home">
+    <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen name="Login" component={Login} />
+    <Stack.Screen
+      name="Details"
+      component={Details}
+      options={{ presentation: "modal" }}
+    />
+  </Stack.Navigator>
+);
 
 export default function App() {
   return (
     <Provider store={store}>
       <CounterProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            {/* Order Matters */}
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Details" component={Details} />
-          </Stack.Navigator>
+          <BottomTabBar.Navigator>
+            <BottomTabBar.Screen
+              name="Main"
+              component={RootStack}
+              options={{ headerShown: false }}
+            />
+          </BottomTabBar.Navigator>
         </NavigationContainer>
       </CounterProvider>
     </Provider>

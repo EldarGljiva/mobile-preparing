@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, Pressable, TextInput, StyleSheet } from "react-native";
 import useCounter from "../hooks/useCounter";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParams } from "../../App";
+import { StackParams } from "../../App";
 
-type HomeProps = NativeStackScreenProps<RootStackParams, "Details">;
+type HomeProps = NativeStackScreenProps<StackParams, "Details">;
 
 const Login = ({ navigation }: HomeProps) => {
   const { counter, increment, decrement } = useCounter();
@@ -41,9 +41,7 @@ const Login = ({ navigation }: HomeProps) => {
         <View style={{ width: "100%" }}>
           <Pressable
             style={styles.button}
-            onPress={() =>
-              navigation.navigate("Details", { email: "eldar@gmail.com" })
-            }
+            onPress={() => navigation.navigate("Details")}
           >
             <Text style={styles.buttonText}>Login</Text>
           </Pressable>

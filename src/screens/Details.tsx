@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParams } from "../../App";
+import { StackParams } from "../../App";
 
-type HomeProps = NativeStackScreenProps<RootStackParams, "Details">;
+type HomeProps = NativeStackScreenProps<StackParams, "Details">;
 
-const Details = ({ route }: HomeProps) => {
-  const { email } = route.params;
+const Details = () => {
+  //const { email } = route.params;
   return (
     <View>
-      <Text>Email is: {email}</Text>
+      <Text>Email is: </Text>
     </View>
   );
 };

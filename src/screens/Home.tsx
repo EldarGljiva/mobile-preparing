@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { View, Text, Button } from "react-native";
 import screenContainer from "../styles/screenContainer";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParams } from "../../App";
+import { StackParams } from "../../App";
 import Counter from "../components/Counter";
 
-type HomeProps = NativeStackScreenProps<RootStackParams, "Home">;
+type HomeProps = NativeStackScreenProps<StackParams, "Home">;
 
 const Home = ({ navigation }: HomeProps) => {
   return (
